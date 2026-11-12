@@ -9,6 +9,7 @@ import { RoundProgress } from '@/features/game/components/RoundProgress'
 import { RoundResultCard } from '@/features/game/components/RoundResultCard'
 import { useGameSession } from '@/features/game/useGameSession'
 import { ResultsPanel } from '@/features/results/ResultsPanel'
+import { siteUrl } from '@/shared/lib/siteUrl'
 import { useGetCustomGame } from '@/shared/api/generated/custom-games/custom-games'
 import type { RoundView } from '@/shared/api/generated/models'
 import { RoundStatus } from '@/shared/api/generated/models'
@@ -61,7 +62,7 @@ export function GamePage() {
       </nav>
 
       {showResults ? (
-        <ResultsPanel session={session} shareUrl={code ? `${window.location.origin}/g/${code}` : window.location.origin} />
+        <ResultsPanel session={session} shareUrl={code ? siteUrl(`g/${code}`) : siteUrl()} />
       ) : (
         <>
           <RoundProgress rounds={session.rounds} viewIndex={index} totalPoints={session.totalPoints} />

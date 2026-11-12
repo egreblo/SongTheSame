@@ -3,12 +3,13 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
+import { siteUrl } from '@/shared/lib/siteUrl'
 import type { CustomGameSummary } from '@/shared/api/generated/models'
 
 /** A created game with its share link, a copy button and a play button. */
 export function CustomGameLink({ game }: { game: CustomGameSummary }) {
   const { t } = useTranslation()
-  const url = `${window.location.origin}/g/${game.code}`
+  const url = siteUrl(`g/${game.code}`)
 
   const copy = async () => {
     await navigator.clipboard.writeText(url)
