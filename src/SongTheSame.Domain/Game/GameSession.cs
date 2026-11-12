@@ -59,9 +59,20 @@ public sealed class GameSession
     public void RegisterPhase1Attempt(int index, Guid guessedSongId, bool correct) =>
         PlayableRound(index).RegisterPhase1Attempt(guessedSongId, correct);
 
-    public void RegisterPhase2(int index, Guid guessedSongId, int score, DateTimeOffset now)
+    public void RegisterPhase2(int index, Guid guessedSongId, int score, DateTimeOffset now, double? matchStartSeconds = null)
     {
-        PlayableRound(index).RegisterPhase2(guessedSongId, score);
+        PlayableRound(index).RegisterPhase2(guessedSongId, score, matchStartSeconds);
+        CompleteIfFinished(now);
+    }
+
+    public void SkipPhase2(int index, DateTimeOffset now)
+    {
+        PlayableRound(index).SkipPhase2();
+        CompleteIfFinished(now);
+    }
+
+    private void CompleteIfFinished(DateTimeOffset now)
+    {
         if (_rounds.All(round => round.Phase2Done)) CompletedAt = now;
     }
 }

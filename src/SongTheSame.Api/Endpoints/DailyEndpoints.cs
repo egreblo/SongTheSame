@@ -6,6 +6,7 @@ using SongTheSame.Application.Features.Game.GetSession;
 using SongTheSame.Application.Features.Game.GuessSong;
 using SongTheSame.Application.Features.Game.ReportRound;
 using SongTheSame.Application.Features.Game.SkipClip;
+using SongTheSame.Application.Features.Game.SkipSimilarity;
 using SongTheSame.Application.Features.Game.StartSession;
 using SongTheSame.Application.Features.Game.SubmitSimilarity;
 
@@ -53,6 +54,13 @@ public static class DailyEndpoints
                 IHandler<SubmitSimilarityCommand, SessionView> handler, CancellationToken ct) =>
                 WithPlayer(http, player => handler.HandleAsync(new SubmitSimilarityCommand(sessionId, player, round, body.SongId), ct)))
             .WithName("SubmitSimilarity")
+            .Produces<SessionView>();
+
+        group.MapPost("/session/{sessionId:guid}/rounds/{round:int}/skip-similarity", (
+                Guid sessionId, int round, HttpContext http,
+                IHandler<SkipSimilarityCommand, SessionView> handler, CancellationToken ct) =>
+                WithPlayer(http, player => handler.HandleAsync(new SkipSimilarityCommand(sessionId, player, round), ct)))
+            .WithName("SkipSimilarity")
             .Produces<SessionView>();
 
         group.MapGet("/session/{sessionId:guid}/stats", (

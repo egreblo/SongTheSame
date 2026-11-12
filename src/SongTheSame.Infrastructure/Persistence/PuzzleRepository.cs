@@ -10,6 +10,10 @@ internal sealed class PuzzleRepository(AppDbContext db) : IPuzzleRepository
         db.Puzzles.Include(puzzle => puzzle.Rounds).AsNoTracking()
             .FirstOrDefaultAsync(puzzle => puzzle.Id == id, cancellationToken);
 
+    public async Task<IReadOnlyList<Puzzle>> GetManyAsync(IReadOnlyCollection<Guid> ids, CancellationToken cancellationToken) =>
+        await db.Puzzles.Include(puzzle => puzzle.Rounds).AsNoTracking()
+            .Where(puzzle => ids.Contains(puzzle.Id)).ToListAsync(cancellationToken);
+
     public Task<Puzzle?> GetByDayAsync(DateOnly day, CancellationToken cancellationToken) =>
         db.Puzzles.Include(puzzle => puzzle.Rounds).AsNoTracking()
             .FirstOrDefaultAsync(puzzle => puzzle.Kind == PuzzleKind.Daily && puzzle.Day == day, cancellationToken);
@@ -33,6 +37,13 @@ internal sealed class PuzzleRepository(AppDbContext db) : IPuzzleRepository
             .ToListAsync(cancellationToken);
         return [.. ids];
     }
+
+    public async Task<IReadOnlyList<Puzzle>> ListTrackedFromDayAsync(DateOnly day, CancellationToken cancellationToken) =>
+        await db.Puzzles.Include(puzzle => puzzle.Rounds)
+            .Where(puzzle => puzzle.Kind == PuzzleKind.Daily && puzzle.Day >= day)
+            .OrderBy(puzzle => puzzle.Day).ToListAsync(cancellationToken);
+
+    public Task SaveAsync(CancellationToken cancellationToken) => db.SaveChangesAsync(cancellationToken);
 
     public async Task<bool> TryAddAsync(Puzzle puzzle, CancellationToken cancellationToken)
     {

@@ -46,11 +46,13 @@ public sealed class SessionViewBuilder(ISongCatalog catalog, IMusicSource music)
 
         var phase2 = progress.Phase2Done
             ? new Phase2View(
-                Summarize(songs[progress.Phase2SongId!.Value]), progress.Phase2Score!.Value, progress.Phase2Points,
+                progress.Phase2SongId is { } guessId ? Summarize(songs[guessId]) : null,
+                progress.Phase2Skipped, progress.Phase2Score!.Value, progress.Phase2Points, progress.Phase2MatchStartSeconds,
                 round.BestMatches
                     .Select(match => new MatchView(
                         Summarize(songs[match.SongId]),
-                        RoundScoring.RelativeToBest(match.Score, round.BestMatches.Max(m => m.Score))))
+                        RoundScoring.RelativeToBest(match.Score, round.BestMatches.Max(m => m.Score)),
+                        match.StartSeconds))
                     .ToList())
             : null;
 

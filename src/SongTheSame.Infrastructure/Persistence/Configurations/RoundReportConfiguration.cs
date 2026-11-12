@@ -13,6 +13,7 @@ internal sealed class RoundReportConfiguration : IEntityTypeConfiguration<RoundR
         builder.HasIndex(report => new { report.SessionId, report.RoundIndex }).IsUnique();
         builder.HasIndex(report => report.Status);
         builder.Property(report => report.Note).HasMaxLength(500);
+        builder.Property(report => report.AdminNote).HasMaxLength(500);
         builder.Property(report => report.Status).HasConversion<string>().HasMaxLength(20);
     }
 }

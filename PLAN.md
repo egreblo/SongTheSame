@@ -192,3 +192,12 @@ Poznata ograničenja i ideje za dalje:
 - Editor ne dopušta ručni odabir segmenta (bira se automatski najjasniji dio).
 - Waveform prikaz nije implementiran (Deezer CDN i CORS); koristi se vlastiti indikator.
 - Dnevne zagonetke trebaju biti unaprijed generirane (workflow `daily-puzzles.yml`), generiranje traje ~20 s po danu.
+
+## 10. Dodano nakon prve verzije
+
+- Admin stranica `/admin` za pregled prijavljenih rezultata (slušanje odlomka, igračevog odabira i najboljih blizanaca, bilješka, oznaka "pregledano"). Admini se zadaju varijablama `Admin__Emails__N` / `Admin__UserIds__N`.
+- Preskakanje faze 2 (0 bodova za fazu 2, runda se normalno nastavlja).
+- Slušanje najsličnijih pjesama počevši od dijela gdje su najsličnije (DTW sada vraća i početak poravnanja; endpoint `GET /api/songs/{id}/preview` daje svježi URL isječka).
+- Zvučni efekti (sintetizirani Web Audio API-jem, bez datoteka) s gumbom za isključivanje.
+- Stranica o privatnosti i obavijest o pohrani u pregledniku (predložak, treba pravni pregled).
+- Veći katalog (46 playlista, oko 2.150 pjesama), nova naredba `refresh-matches`.

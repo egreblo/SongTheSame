@@ -1,8 +1,9 @@
 namespace SongTheSame.Application.Features.Similarity;
 
-public sealed record SimilarityScore(int Score, float Cost);
+/// <param name="MatchStartSeconds">Where in the guessed song preview the most similar part begins.</param>
+public sealed record SimilarityScore(int Score, float Cost, double MatchStartSeconds, double MatchEndSeconds);
 
-public sealed record SimilarMatch(Guid SongId, int Score);
+public sealed record SimilarMatch(Guid SongId, int Score, double StartSeconds, double EndSeconds);
 
 /// <summary>Scores how well a guessed song contains a part similar to a segment of a target song.</summary>
 public interface ISimilarityService

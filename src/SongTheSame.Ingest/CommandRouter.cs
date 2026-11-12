@@ -7,7 +7,8 @@ public sealed class CommandRouter(
     PlaylistCommand playlist,
     SeedCommand seed,
     CalibrateCommand calibrate,
-    PuzzlesCommand puzzles)
+    PuzzlesCommand puzzles,
+    RefreshMatchesCommand refreshMatches)
 {
     private const string Usage = """
         Usage:
@@ -16,6 +17,7 @@ public sealed class CommandRouter(
                                                           Ingest the tracks of one Deezer playlist
           calibrate [samples]                             Measure random-pair costs used to turn similarity into 1-100 scores
           puzzles [days]                                  Pre-generate daily puzzles starting today (default 7 days)
+          refresh-matches [dayOffset]                     Recompute stored best twins of puzzles from today (+offset) onward
           seed [path]                                     Ingest every playlist in the seed file
                                                           (default: seed/playlists.json)
         Connection string: set ConnectionStrings__Database or use `dotnet user-secrets`.
@@ -37,6 +39,7 @@ public sealed class CommandRouter(
             case "seed": return await seed.RunAsync(rest);
             case "calibrate": return await calibrate.RunAsync(rest);
             case "puzzles": return await puzzles.RunAsync(rest);
+            case "refresh-matches": return await refreshMatches.RunAsync(rest);
             default:
                 Console.WriteLine(Usage);
                 return 1;

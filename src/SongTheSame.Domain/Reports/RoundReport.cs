@@ -29,7 +29,19 @@ public sealed class RoundReport
 
     public ReportStatus Status { get; private set; }
 
+    public string? AdminNote { get; private set; }
+
+    public DateTimeOffset? ReviewedAt { get; private set; }
+
     public DateTimeOffset CreatedAt { get; private set; }
+
+    public void MarkReviewed(string? adminNote, DateTimeOffset now)
+    {
+        Status = ReportStatus.Reviewed;
+        var trimmed = adminNote?.Trim();
+        AdminNote = string.IsNullOrEmpty(trimmed) ? null : trimmed[..Math.Min(trimmed.Length, 500)];
+        ReviewedAt = now;
+    }
 
     public static RoundReport Create(
         Guid sessionId, int roundIndex, Guid targetSongId, Guid guessedSongId, int score, string? note, DateTimeOffset now) =>

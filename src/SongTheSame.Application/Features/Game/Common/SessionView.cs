@@ -37,6 +37,10 @@ public sealed record GuessView(SongSummary? Song);
 
 public sealed record RevealView(SongSummary Song, bool Solved, double SegmentStartSeconds, double SegmentSeconds);
 
-public sealed record Phase2View(SongSummary Guess, int Score, int Points, IReadOnlyList<MatchView> BestMatches);
+/// <param name="Guess">Null when the player skipped finding a twin.</param>
+/// <param name="GuessMatchStartSeconds">Where the guessed song is most similar to the segment, for playback.</param>
+public sealed record Phase2View(
+    SongSummary? Guess, bool Skipped, int Score, int Points, double? GuessMatchStartSeconds, IReadOnlyList<MatchView> BestMatches);
 
-public sealed record MatchView(SongSummary Song, int Score);
+/// <param name="StartSeconds">Where in the song preview the most similar part begins, when known.</param>
+public sealed record MatchView(SongSummary Song, int Score, double? StartSeconds);

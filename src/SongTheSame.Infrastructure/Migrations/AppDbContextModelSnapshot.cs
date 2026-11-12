@@ -187,6 +187,10 @@ namespace SongTheSame.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("AdminNote")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -196,6 +200,9 @@ namespace SongTheSame.Infrastructure.Migrations
                     b.Property<string>("Note")
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)");
+
+                    b.Property<DateTimeOffset?>("ReviewedAt")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("RoundIndex")
                         .HasColumnType("integer");
@@ -352,6 +359,9 @@ namespace SongTheSame.Infrastructure.Migrations
                             b1.Property<bool>("Phase1Solved")
                                 .HasColumnType("boolean");
 
+                            b1.Property<double?>("Phase2MatchStartSeconds")
+                                .HasColumnType("double precision");
+
                             b1.Property<int?>("Phase2Score")
                                 .HasColumnType("integer");
 
@@ -410,9 +420,13 @@ namespace SongTheSame.Infrastructure.Migrations
                             b1.Property<int>("__synthesizedOrdinal")
                                 .ValueGeneratedOnAdd();
 
+                            b1.Property<double?>("EndSeconds");
+
                             b1.Property<int>("Score");
 
                             b1.Property<Guid>("SongId");
+
+                            b1.Property<double?>("StartSeconds");
 
                             b1.HasKey("PuzzleRoundId", "__synthesizedOrdinal");
 

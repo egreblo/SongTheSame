@@ -2,8 +2,9 @@ namespace SongTheSame.Audio;
 
 /// <param name="Cost">Average cosine distance per query frame along the best alignment (0 = identical).</param>
 /// <param name="Transposition">Semitone shift of the query that matched best (0-11).</param>
-/// <param name="EndFrame">Frame in the reference where the best alignment ends.</param>
-public readonly record struct SimilarityResult(float Cost, int Transposition, int EndFrame);
+/// <param name="StartFrame">Frame in the reference where the best-matching part begins.</param>
+/// <param name="EndFrame">Frame in the reference where the best-matching part ends.</param>
+public readonly record struct SimilarityResult(float Cost, int Transposition, int StartFrame, int EndFrame);
 
 /// <summary>
 /// Finds the part of <c>reference</c> that sounds most like <c>query</c>, tolerant to tempo changes
@@ -15,7 +16,7 @@ public static class ChromaSimilarityScorer
 
     public static SimilarityResult Compare(ChromaSequence query, ChromaSequence reference)
     {
-        var best = new SimilarityResult(float.PositiveInfinity, 0, 0);
+        var best = new SimilarityResult(float.PositiveInfinity, 0, 0, 0);
         var cost = new float[query.FrameCount * reference.FrameCount];
 
         for (var shift = 0; shift < Dim; shift++)
@@ -23,7 +24,7 @@ public static class ChromaSimilarityScorer
             FillCostMatrix(query, reference, shift, cost);
             var match = SubsequenceDtw.Align(cost, query.FrameCount, reference.FrameCount);
             if (match.AverageCost < best.Cost)
-                best = new SimilarityResult(match.AverageCost, shift, match.EndFrame);
+                best = new SimilarityResult(match.AverageCost, shift, match.StartFrame, match.EndFrame);
         }
 
         return best;

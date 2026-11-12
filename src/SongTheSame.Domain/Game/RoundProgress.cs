@@ -22,7 +22,13 @@ public sealed class RoundProgress
 
     public int? Phase2Score { get; private set; }
 
+    /// <summary>Where in the guessed song preview the part most similar to the segment begins.</summary>
+    public double? Phase2MatchStartSeconds { get; private set; }
+
     public bool Phase2Done => Phase2Score.HasValue;
+
+    /// <summary>The player gave up on finding a twin: answered, but with no song and no score.</summary>
+    public bool Phase2Skipped => Phase2Done && Phase2SongId is null;
 
     public int Phase1Points => RoundScoring.Phase1Points(Phase1Attempts, Phase1Solved);
 
@@ -53,12 +59,22 @@ public sealed class RoundProgress
         }
     }
 
-    public void RegisterPhase2(Guid guessedSongId, int score)
+    public void RegisterPhase2(Guid guessedSongId, int score, double? matchStartSeconds = null)
     {
         if (!Phase1Done) throw new GameRuleException("Finish phase 1 before phase 2.");
         if (Phase2Done) throw new GameRuleException("Phase 2 of this round is already answered.");
 
         Phase2SongId = guessedSongId;
         Phase2Score = score;
+        Phase2MatchStartSeconds = matchStartSeconds;
+    }
+
+    public void SkipPhase2()
+    {
+        if (!Phase1Done) throw new GameRuleException("Finish phase 1 before phase 2.");
+        if (Phase2Done) throw new GameRuleException("Phase 2 of this round is already answered.");
+
+        Phase2SongId = null;
+        Phase2Score = 0;
     }
 }

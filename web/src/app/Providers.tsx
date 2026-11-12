@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useEffect, type ReactNode } from 'react'
 import { Toaster } from '@/components/ui/sonner'
 import { TooltipProvider } from '@/components/ui/tooltip'
+import { StorageNotice } from '@/shared/ui/StorageNotice'
 import { claimSessions } from '@/shared/api/generated/me/me'
 import { startAuthSync } from '@/shared/auth/authStore'
 
@@ -26,6 +27,7 @@ export function Providers({ children }: { children: ReactNode }) {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>{children}</TooltipProvider>
       <Toaster theme="dark" position="top-center" />
+      <StorageNotice />
     </QueryClientProvider>
   )
 }

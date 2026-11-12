@@ -20,4 +20,16 @@ internal sealed class ReportRepository(AppDbContext db) : IReportRepository
             return false;
         }
     }
+
+    public async Task<IReadOnlyList<RoundReport>> ListAsync(ReportStatus status, int take, CancellationToken cancellationToken) =>
+        await db.RoundReports.AsNoTracking()
+            .Where(report => report.Status == status)
+            .OrderByDescending(report => report.CreatedAt)
+            .Take(take)
+            .ToListAsync(cancellationToken);
+
+    public Task<RoundReport?> GetAsync(Guid id, CancellationToken cancellationToken) =>
+        db.RoundReports.FirstOrDefaultAsync(report => report.Id == id, cancellationToken);
+
+    public Task SaveAsync(CancellationToken cancellationToken) => db.SaveChangesAsync(cancellationToken);
 }

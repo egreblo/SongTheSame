@@ -35,7 +35,7 @@ public sealed class SubmitSimilarityHandler(
         var result = await similarity.ScoreAsync(round.SongId, round.SegmentStartFrame, guess.Id, cancellationToken);
         var bestRaw = round.BestMatches.Count > 0 ? round.BestMatches.Max(match => match.Score) : 0;
         var score = RoundScoring.RelativeToBest(result.Score, bestRaw);
-        session.RegisterPhase2(request.RoundIndex, guess.Id, score, clock.GetUtcNow());
+        session.RegisterPhase2(request.RoundIndex, guess.Id, score, clock.GetUtcNow(), result.MatchStartSeconds);
         await sessions.SaveAsync(cancellationToken);
         return await views.BuildAsync(session, puzzle, cancellationToken);
     }

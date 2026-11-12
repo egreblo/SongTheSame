@@ -14,6 +14,20 @@ public class SubsequenceDtwTests
 
         result.Cost.ShouldBe(0f, 1e-4f);
         result.Transposition.ShouldBe(0);
+        result.StartFrame.ShouldBe(3);
+        result.EndFrame.ShouldBe(6);
+    }
+
+    [Fact]
+    public void The_start_of_the_match_is_reported_even_when_the_query_is_slower()
+    {
+        var reference = BuildSequence([0, 2, 4, 5, 7, 9, 11, 1, 3, 6]);
+        var stretched = BuildSequence([5, 5, 7, 7, 9, 9, 11, 11]); // reference frames 3..6 at half speed
+
+        var result = ChromaSimilarityScorer.Compare(stretched, reference);
+
+        result.Cost.ShouldBe(0f, 1e-4f);
+        result.StartFrame.ShouldBe(3);
         result.EndFrame.ShouldBe(6);
     }
 

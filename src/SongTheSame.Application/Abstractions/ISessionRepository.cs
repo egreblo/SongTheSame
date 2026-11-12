@@ -8,6 +8,9 @@ public interface ISessionRepository
 {
     Task<GameSession?> GetAsync(Guid id, CancellationToken cancellationToken);
 
+    /// <summary>Read-only sessions with their rounds.</summary>
+    Task<IReadOnlyList<GameSession>> GetManyAsync(IReadOnlyCollection<Guid> ids, CancellationToken cancellationToken);
+
     Task<GameSession?> FindAsync(string playerKey, Guid puzzleId, CancellationToken cancellationToken);
 
     Task<bool> TryAddAsync(GameSession session, CancellationToken cancellationToken);

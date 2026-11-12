@@ -18,7 +18,7 @@ public sealed class ReportRoundHandler(
         var (session, puzzle) = await loader.LoadAsync(request.SessionId, request.PlayerKey, cancellationToken);
         var progress = session.Rounds.FirstOrDefault(round => round.Index == request.RoundIndex)
             ?? throw new KeyNotFoundException("Round not found.");
-        if (!progress.Phase2Done) throw new GameRuleException("Only rounds with a score can be reported.");
+        if (!progress.Phase2Done || progress.Phase2Skipped) throw new GameRuleException("Only rounds with a score can be reported.");
 
         var round = puzzle.Rounds.Single(r => r.Index == request.RoundIndex);
         var report = RoundReport.Create(

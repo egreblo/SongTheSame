@@ -14,6 +14,14 @@ internal sealed class InMemoryPuzzleRepository : IPuzzleRepository
     public Task<Puzzle?> GetAsync(Guid id, CancellationToken cancellationToken) =>
         Task.FromResult(Puzzles.FirstOrDefault(puzzle => puzzle.Id == id));
 
+    public Task<IReadOnlyList<Puzzle>> GetManyAsync(IReadOnlyCollection<Guid> ids, CancellationToken cancellationToken) =>
+        Task.FromResult<IReadOnlyList<Puzzle>>(Puzzles.Where(puzzle => ids.Contains(puzzle.Id)).ToList());
+
+    public Task<IReadOnlyList<Puzzle>> ListTrackedFromDayAsync(DateOnly day, CancellationToken cancellationToken) =>
+        Task.FromResult<IReadOnlyList<Puzzle>>(Puzzles.Where(p => p.Kind == PuzzleKind.Daily && p.Day >= day).OrderBy(p => p.Day).ToList());
+
+    public Task SaveAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
     public Task<Puzzle?> GetByDayAsync(DateOnly day, CancellationToken cancellationToken) =>
         Task.FromResult(Puzzles.FirstOrDefault(puzzle => puzzle.Kind == PuzzleKind.Daily && puzzle.Day == day));
 
@@ -44,6 +52,9 @@ internal sealed class InMemorySessionRepository : ISessionRepository
 
     public Task<GameSession?> GetAsync(Guid id, CancellationToken cancellationToken) =>
         Task.FromResult(Sessions.FirstOrDefault(session => session.Id == id));
+
+    public Task<IReadOnlyList<GameSession>> GetManyAsync(IReadOnlyCollection<Guid> ids, CancellationToken cancellationToken) =>
+        Task.FromResult<IReadOnlyList<GameSession>>(Sessions.Where(session => ids.Contains(session.Id)).ToList());
 
     public Task<GameSession?> FindAsync(string playerKey, Guid puzzleId, CancellationToken cancellationToken) =>
         Task.FromResult(Sessions.FirstOrDefault(session => session.PlayerKey == playerKey && session.PuzzleId == puzzleId));

@@ -2,7 +2,9 @@ using Microsoft.Extensions.Time.Testing;
 using SongTheSame.Application.Features.Game.Common;
 using SongTheSame.Application.Features.Game.GetSession;
 using SongTheSame.Application.Features.Game.GuessSong;
+using SongTheSame.Application.Features.Game.RefreshMatches;
 using SongTheSame.Application.Features.Game.SkipClip;
+using SongTheSame.Application.Features.Game.SkipSimilarity;
 using SongTheSame.Application.Features.Game.StartSession;
 using SongTheSame.Application.Features.Game.SubmitSimilarity;
 using SongTheSame.Application.Features.Similarity;
@@ -14,7 +16,7 @@ using SongTheSame.Domain.Songs;
 namespace SongTheSame.Application.Tests.Features.Game;
 
 /// <summary>Plays whole days through the real handlers with in-memory stores and synthetic audio features.</summary>
-public class DailyGameFlowTests
+public partial class DailyGameFlowTests
 {
     private const string Player = "anon:11111111-1111-1111-1111-111111111111";
 
@@ -22,6 +24,7 @@ public class DailyGameFlowTests
     private readonly InMemoryPuzzleRepository _puzzles = new();
     private readonly InMemorySessionRepository _sessions = new();
     private readonly FakeTimeProvider _clock = new(new DateTimeOffset(2026, 11, 13, 10, 0, 0, TimeSpan.Zero));
+    private readonly PuzzleRoundBuilder _builder;
     private readonly StartSessionHandler _start;
     private readonly GuessSongHandler _guess;
     private readonly SkipClipHandler _skip;
@@ -45,7 +48,8 @@ public class DailyGameFlowTests
             CancellationToken.None);
 
         var similarity = new SimilarityService(features, calibrations);
-        var provider = new DailyPuzzleProvider(_puzzles, _catalog, new PuzzleRoundBuilder(features, similarity), _clock);
+        _builder = new PuzzleRoundBuilder(features, similarity);
+        var provider = new DailyPuzzleProvider(_puzzles, _catalog, _builder, _clock);
         var views = new SessionViewBuilder(_catalog, new FakeMusicSource());
         var loader = new SessionLoader(_sessions, _puzzles);
 
@@ -133,62 +137,6 @@ public class DailyGameFlowTests
         view.Rounds[0].Status.ShouldBe(RoundStatus.Phase2);
         view.Rounds[0].Reveal!.Solved.ShouldBeFalse();
         view.Rounds[0].Phase1Points.ShouldBe(0);
-    }
-
-    [Fact]
-    public async Task Phase_two_scores_between_1_and_100_and_shows_the_best_matches_afterwards()
-    {
-        var view = await _start.HandleAsync(new StartSessionCommand(Player), Ct);
-        var target = TargetOf(view.SessionId, 0);
-        await _guess.HandleAsync(new GuessSongCommand(view.SessionId, Player, 0, target.Id), Ct);
-        var other = _catalog.Songs.First(song => song.Id != target.Id);
-
-        view = await _similarity.HandleAsync(new SubmitSimilarityCommand(view.SessionId, Player, 0, other.Id), Ct);
-
-        var phase2 = view.Rounds[0].Phase2!;
-        phase2.Score.ShouldBeInRange(1, 100);
-        phase2.Points.ShouldBeInRange(0, 50);
-        phase2.BestMatches.Count.ShouldBe(3);
-        phase2.BestMatches[0].Score.ShouldBe(100);
-        view.Rounds[0].Status.ShouldBe(RoundStatus.Done);
-        view.Rounds[1].Status.ShouldBe(RoundStatus.Phase1);
-    }
-
-    [Fact]
-    public async Task Choosing_the_best_match_in_phase_two_earns_the_maximum_score()
-    {
-        var view = await _start.HandleAsync(new StartSessionCommand(Player), Ct);
-        var session = _sessions.Sessions.Single();
-        var puzzle = _puzzles.Puzzles.Single();
-        var target = TargetOf(view.SessionId, 0);
-        await _guess.HandleAsync(new GuessSongCommand(view.SessionId, Player, 0, target.Id), Ct);
-        var bestId = puzzle.Rounds[0].BestMatches.MaxBy(match => match.Score)!.SongId;
-
-        view = await _similarity.HandleAsync(new SubmitSimilarityCommand(session.Id, Player, 0, bestId), Ct);
-
-        view.Rounds[0].Phase2!.Score.ShouldBe(100);
-        view.Rounds[0].Phase2!.Points.ShouldBe(50);
-    }
-
-    [Fact]
-    public async Task Phase_two_rejects_the_song_from_phase_one()
-    {
-        var view = await _start.HandleAsync(new StartSessionCommand(Player), Ct);
-        var target = TargetOf(view.SessionId, 0);
-        await _guess.HandleAsync(new GuessSongCommand(view.SessionId, Player, 0, target.Id), Ct);
-
-        await Should.ThrowAsync<GameRuleException>(
-            () => _similarity.HandleAsync(new SubmitSimilarityCommand(view.SessionId, Player, 0, target.Id), Ct));
-    }
-
-    [Fact]
-    public async Task Phase_two_is_refused_before_phase_one_is_finished()
-    {
-        var view = await _start.HandleAsync(new StartSessionCommand(Player), Ct);
-        var other = _catalog.Songs[0];
-
-        await Should.ThrowAsync<GameRuleException>(
-            () => _similarity.HandleAsync(new SubmitSimilarityCommand(view.SessionId, Player, 0, other.Id), Ct));
     }
 
     [Fact]

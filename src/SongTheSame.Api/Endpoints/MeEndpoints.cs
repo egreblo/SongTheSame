@@ -12,6 +12,8 @@ public sealed record UpdateProfileRequest(string DisplayName);
 
 public sealed record ClaimSessionsResponse(int Moved);
 
+public sealed record MeResponse(Guid UserId, string DisplayName, bool IsAdmin);
+
 /// <summary>Account endpoints; all require a valid Supabase token.</summary>
 public static class MeEndpoints
 {
@@ -19,8 +21,11 @@ public static class MeEndpoints
     {
         var group = app.MapGroup("/api/me").WithTags("Me").RequireAuthorization();
 
-        group.MapGet("/", async (HttpContext http, IHandler<GetMeQuery, ProfileView> handler, CancellationToken ct) =>
-                await handler.HandleAsync(new GetMeQuery(UserId(http), AuthenticatedUser.SuggestedName(http.User)), ct))
+        group.MapGet("/", async (HttpContext http, AdminOptions admin, IHandler<GetMeQuery, ProfileView> handler, CancellationToken ct) =>
+            {
+                var profile = await handler.HandleAsync(new GetMeQuery(UserId(http), AuthenticatedUser.SuggestedName(http.User)), ct);
+                return new MeResponse(profile.UserId, profile.DisplayName, admin.IsAdmin(http.User));
+            })
             .WithName("GetMe");
 
         group.MapPut("/", async (UpdateProfileRequest body, HttpContext http, IHandler<UpdateProfileCommand, ProfileView> handler, CancellationToken ct) =>

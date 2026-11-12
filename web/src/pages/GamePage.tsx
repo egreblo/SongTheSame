@@ -10,6 +10,7 @@ import { RoundResultCard } from '@/features/game/components/RoundResultCard'
 import { useGameSession } from '@/features/game/useGameSession'
 import { ResultsPanel } from '@/features/results/ResultsPanel'
 import { siteUrl } from '@/shared/lib/siteUrl'
+import { SoundToggle } from '@/shared/ui/SoundToggle'
 import { useGetCustomGame } from '@/shared/api/generated/custom-games/custom-games'
 import type { RoundView } from '@/shared/api/generated/models'
 import { RoundStatus } from '@/shared/api/generated/models'
@@ -58,7 +59,7 @@ export function GamePage() {
           <Home className="size-5" aria-hidden />
         </Button>
         <h1 className="max-w-48 truncate text-xl font-semibold">{customGame.data?.data.title ?? t('app.title')}</h1>
-        <span className="size-9" />
+        <SoundToggle />
       </nav>
 
       {showResults ? (
@@ -81,6 +82,7 @@ export function GamePage() {
               round={round}
               busy={game.isBusy}
               onSubmit={(songId) => act(() => game.submitSimilarity(round.index, songId))}
+              onSkip={() => act(() => game.skipSimilarity(round.index))}
             />
           )}
           {round.status === RoundStatus.Done && (

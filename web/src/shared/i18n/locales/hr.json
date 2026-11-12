@@ -35,7 +35,11 @@
       "title": "Pronađi njezinog blizanca",
       "hint": "Upiši drugu pjesmu koja sadrži dio najsličniji ovom odlomku. Tempo i tonalitet nisu bitni.",
       "submit": "Potvrdi odgovor",
-      "oneTry": "Imaš samo jedan pokušaj."
+      "oneTry": "Imaš samo jedan pokušaj.",
+      "skip": "Preskoči, ne mogu pronaći",
+      "skipConfirm": "Preskočiti blizanca? Za njega dobivaš 0 bodova.",
+      "skipCancel": "Natrag",
+      "skipYes": "Preskoči"
     },
     "solvedIn_one": "Pogođeno iz {{count}}. pokušaja",
     "solvedIn_other": "Pogođeno iz {{count}}. pokušaja",
@@ -45,7 +49,15 @@
     "yourPick": "Tvoj odabir",
     "bestTwins": "Najbolji blizanci u katalogu",
     "nextRound": "Sljedeća runda",
-    "seeResults": "Prikaži rezultat"
+    "seeResults": "Prikaži rezultat",
+    "listen": "Poslušaj i usporedi",
+    "listenHint": "Svaka pjesma kreće od dijela koji najviše sliči odlomku.",
+    "original": "Originalni odlomak",
+    "playPart": "Pokreni ovaj dio",
+    "mostSimilarAt": "najsličnije kod {{time}}",
+    "fromStart": "od početka",
+    "noPreview": "Za ovu pjesmu trenutno nema isječka.",
+    "skippedTwin": "Preskočeno"
   },
   "results": {
     "title": "Tvoj rezultat za {{day}}",
@@ -84,7 +96,8 @@
   "nav": {
     "play": "Igraj",
     "leagues": "Lige",
-    "create": "Izradi igru"
+    "create": "Izradi igru",
+    "admin": "Admin"
   },
   "auth": {
     "signIn": "Prijava",
@@ -133,5 +146,57 @@
     "another": "Izradi novu igru",
     "playIt": "Igraj",
     "myGames": "Tvoje igre"
+  },
+  "sound": {
+    "mute": "Isključi zvukove",
+    "unmute": "Uključi zvukove"
+  },
+  "footer": {
+    "feedback": "Povratna informacija"
+  },
+  "admin": {
+    "title": "Prijavljeni rezultati",
+    "intro": "Rezultati koje su igrači označili kao pogrešne. Poslušaj i odluči.",
+    "forbidden": "Ova stranica je samo za administratore.",
+    "empty": "Ovdje nema ničega.",
+    "tabOpen": "Otvoreno",
+    "tabReviewed": "Pregledano",
+    "round": "Runda {{number}}",
+    "scoreShown": "Prikazani rezultat: {{score}}",
+    "targetSegment": "Ciljni odlomak",
+    "playersPick": "Igračev odabir",
+    "bestTwin": "Najbolji blizanac",
+    "notePlaceholder": "Bilješka za sebe (neobavezno)",
+    "markReviewed": "Označi kao pregledano",
+    "reviewed": "Označeno kao pregledano.",
+    "reviewedNoNote": "Pregledano."
+  },
+  "privacy": {
+    "title": "Privatnost",
+    "updated": "Zadnje ažuriranje: studeni 2026.",
+    "intro": "SongTheSame je mali hobi projekt. Ova stranica jednostavnim riječima objašnjava što stranica sprema i tko je još uključen.",
+    "notice": "Ova stranica sprema nekoliko malih postavki u tvom pregledniku (anonimni ID igrača, jezik, zvuk).",
+    "learnMore": "Saznaj više",
+    "noticeLabel": "Obavijest o pohrani",
+    "what": {
+      "title": "Što spremamo o tebi",
+      "body": "Kad igraš, rezultate spremamo pod nasumičnim anonimnim ID-jem koji živi u tvom pregledniku. Ako se prijaviš, spremamo i ID računa, prikazno ime koje odabereš (isprva tvoje Google ime ili prvi dio e-maila), rezultate igara, lige kojima se pridružiš i igre koje izradiš. Ne koristimo oglase ni analitičke tragače."
+    },
+    "storage": {
+      "title": "Što ostaje u tvom pregledniku",
+      "body": "Anonimni ID igrača, odabrani jezik, postavka zvuka i je li zatvorena obavijest o pohrani spremaju se u lokalnu pohranu preglednika. Potrebni su da stranica radi kako očekuješ. Brisanjem podataka preglednika uklanjaju se (anonimni napredak tada nestaje)."
+    },
+    "accounts": {
+      "title": "Računi",
+      "body": "Prijavu pruža Supabase, putem Googlea ili poveznice na e-mail. Od pružatelja prijave dobivamo ID računa, e-mail adresu i ime. Prikazna imena vide članovi liga kojima se pridružiš."
+    },
+    "thirdParties": {
+      "title": "Ostali uključeni servisi",
+      "body": "Isječci pjesama streamaju se s Deezera, koji zato vidi tvoju IP adresu kad pokreneš zvuk. Stranica radi na Google Cloudu, GitHub Pagesu i Supabaseu (baza i prijava), koji obrađuju podatke u naše ime. Nazivi pjesama, izvođači i omoti pripadaju vlasnicima; zvuk ne spremamo."
+    },
+    "rights": {
+      "title": "Tvoji izbori",
+      "body": "Možeš zatražiti uvid u svoje podatke ili njihovo brisanje (račun, rezultati, lige, izrađene igre) otvaranjem zahtjeva na stranici projekta (poveznica u podnožju) ili kontaktom s vlasnikom stranice. Brisanjem podataka preglednika uklanja se anonimni napredak."
+    }
   }
 }

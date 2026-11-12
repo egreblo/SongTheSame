@@ -19,15 +19,22 @@ public sealed class PuzzleRoundBuilder(ISongFeatureStore features, ISimilaritySe
         var chroma = await features.GetAsync(song.Id, cancellationToken)
             ?? throw new InvalidOperationException($"Song {song.Id} has no features.");
         var start = SegmentPicker.PickStart(chroma, GameRules.SegmentFrames);
-
-        var candidates = await similarity.FindBestMatchesAsync(
-            song.Id, start, BestMatchesToStore + ExtraMatchesForDuplicateFiltering, cancellationToken);
-        var matches = candidates
-            .Where(match => !SongIdentity.IsSameWork(song, songsById[match.SongId]))
-            .Take(BestMatchesToStore)
-            .Select(match => new RoundMatch(match.SongId, match.Score));
+        var matches = await FindMatchesAsync(song, start, songsById, cancellationToken);
 
         return PuzzleRound.Create(
             index, song.Id, start, start / chroma.FramesPerSecond, GameRules.SegmentFrames / chroma.FramesPerSecond, matches);
+    }
+
+    /// <summary>The songs most similar to the segment starting at <paramref name="startFrame"/>, other editions of the same song excluded.</summary>
+    public async Task<List<RoundMatch>> FindMatchesAsync(
+        Song song, int startFrame, IReadOnlyDictionary<Guid, Song> songsById, CancellationToken cancellationToken)
+    {
+        var candidates = await similarity.FindBestMatchesAsync(
+            song.Id, startFrame, BestMatchesToStore + ExtraMatchesForDuplicateFiltering, cancellationToken);
+        return candidates
+            .Where(match => !SongIdentity.IsSameWork(song, songsById[match.SongId]))
+            .Take(BestMatchesToStore)
+            .Select(match => new RoundMatch(match.SongId, match.Score, match.StartSeconds, match.EndSeconds))
+            .ToList();
     }
 }

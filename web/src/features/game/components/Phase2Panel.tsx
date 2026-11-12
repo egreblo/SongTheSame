@@ -1,3 +1,4 @@
+import { SkipForward } from 'lucide-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Badge } from '@/components/ui/badge'
@@ -12,14 +13,16 @@ interface Phase2PanelProps {
   round: RoundView
   busy: boolean
   onSubmit: (songId: string) => void
+  onSkip: () => void
 }
 
 /** Phase 2: the song is revealed; the player names another song that contains the most similar part. */
-export function Phase2Panel({ round, busy, onSubmit }: Phase2PanelProps) {
+export function Phase2Panel({ round, busy, onSubmit, onSkip }: Phase2PanelProps) {
   const { t } = useTranslation()
   const reveal = round.reveal
   const player = useClipPlayer(round.audioUrl)
   const [selected, setSelected] = useState<SongSummary | null>(null)
+  const [confirmingSkip, setConfirmingSkip] = useState(false)
   if (!reveal) return null
 
   return (
@@ -64,6 +67,33 @@ export function Phase2Panel({ round, busy, onSubmit }: Phase2PanelProps) {
           {t('game.phase2.submit')}
         </Button>
         <p className="text-center text-xs text-muted-foreground">{t('game.phase2.oneTry')}</p>
+
+        {confirmingSkip ? (
+          <div className="flex items-center justify-between gap-2 rounded-lg border border-destructive/50 bg-destructive/10 p-3 text-sm">
+            <span>{t('game.phase2.skipConfirm')}</span>
+            <span className="flex gap-1">
+              <Button size="sm" variant="ghost" disabled={busy} onClick={() => setConfirmingSkip(false)}>
+                {t('game.phase2.skipCancel')}
+              </Button>
+              <Button
+                size="sm"
+                variant="destructive"
+                disabled={busy}
+                onClick={() => {
+                  player.stop()
+                  onSkip()
+                }}
+              >
+                {t('game.phase2.skipYes')}
+              </Button>
+            </span>
+          </div>
+        ) : (
+          <Button variant="ghost" className="w-full text-muted-foreground" disabled={busy} onClick={() => setConfirmingSkip(true)}>
+            <SkipForward className="size-4" aria-hidden />
+            {t('game.phase2.skip')}
+          </Button>
+        )}
       </div>
     </section>
   )

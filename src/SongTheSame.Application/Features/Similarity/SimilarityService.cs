@@ -20,8 +20,9 @@ public sealed class SimilarityService(ISongFeatureStore features, ICalibrationSt
             ?? throw new KeyNotFoundException($"Song {guessSongId} has no features.");
         var curve = await LoadCurveAsync(cancellationToken);
 
-        var cost = ChromaSimilarityScorer.Compare(segment, guess).Cost;
-        return new SimilarityScore(curve.Score(cost), cost);
+        var match = ChromaSimilarityScorer.Compare(segment, guess);
+        return new SimilarityScore(
+            curve.Score(match.Cost), match.Cost, match.StartFrame / guess.FramesPerSecond, match.EndFrame / guess.FramesPerSecond);
     }
 
     public async Task<IReadOnlyList<SimilarMatch>> FindBestMatchesAsync(
@@ -32,14 +33,16 @@ public sealed class SimilarityService(ISongFeatureStore features, ICalibrationSt
         var candidates = (await features.GetAllAsync(cancellationToken)).Where(song => song.SongId != targetSongId).ToList();
 
         var finalists = Shortlist(segment, candidates, Math.Max(MinimumFinalists, count * FinalistsPerResult), cancellationToken);
-        var costs = new (Guid SongId, float Cost)[finalists.Count];
+        var results = new (Guid SongId, double Fps, SimilarityResult Match)[finalists.Count];
         Parallel.For(0, finalists.Count, new ParallelOptions { CancellationToken = cancellationToken }, index =>
-            costs[index] = (finalists[index].SongId, ChromaSimilarityScorer.Compare(segment, finalists[index].Chroma).Cost));
+            results[index] = (finalists[index].SongId, finalists[index].Chroma.FramesPerSecond,
+                ChromaSimilarityScorer.Compare(segment, finalists[index].Chroma)));
 
-        return costs
-            .OrderBy(entry => entry.Cost)
+        return results
+            .OrderBy(entry => entry.Match.Cost)
             .Take(count)
-            .Select(entry => new SimilarMatch(entry.SongId, curve.Score(entry.Cost)))
+            .Select(entry => new SimilarMatch(
+                entry.SongId, curve.Score(entry.Match.Cost), entry.Match.StartFrame / entry.Fps, entry.Match.EndFrame / entry.Fps))
             .ToList();
     }
 

@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router'
 import { Button } from '@/components/ui/button'
 import { AppNav } from '@/shared/ui/AppNav'
+import { SiteFooter } from '@/shared/ui/SiteFooter'
 
 export function HomePage() {
   const { t } = useTranslation()
@@ -28,6 +29,7 @@ export function HomePage() {
         <p>2. {t('home.how2')}</p>
         <p>3. {t('home.how3')}</p>
       </section>
+      <SiteFooter />
     </main>
   )
 }

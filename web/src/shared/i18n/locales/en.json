@@ -35,7 +35,11 @@
       "title": "Find its twin",
       "hint": "Name another song that contains the part most similar to this segment. Tempo and key don't matter.",
       "submit": "Submit answer",
-      "oneTry": "You only get one try."
+      "oneTry": "You only get one try.",
+      "skip": "Skip, I can't find one",
+      "skipConfirm": "Skip this twin? You get 0 points for it.",
+      "skipCancel": "Back",
+      "skipYes": "Skip"
     },
     "solvedIn_one": "Got it in {{count}} guess",
     "solvedIn_other": "Got it in {{count}} guesses",
@@ -45,7 +49,15 @@
     "yourPick": "Your pick",
     "bestTwins": "Best twins in the catalog",
     "nextRound": "Next round",
-    "seeResults": "See results"
+    "seeResults": "See results",
+    "listen": "Listen and compare",
+    "listenHint": "Each song starts at the part that sounds most like the segment.",
+    "original": "Original segment",
+    "playPart": "Play this part",
+    "mostSimilarAt": "most similar at {{time}}",
+    "fromStart": "from the start",
+    "noPreview": "No preview available for this song right now.",
+    "skippedTwin": "Skipped"
   },
   "results": {
     "title": "Your result for {{day}}",
@@ -84,7 +96,8 @@
   "nav": {
     "play": "Play",
     "leagues": "Leagues",
-    "create": "Create a game"
+    "create": "Create a game",
+    "admin": "Admin"
   },
   "auth": {
     "signIn": "Sign in",
@@ -132,5 +145,57 @@
     "another": "Create another game",
     "playIt": "Play it",
     "myGames": "Your games"
+  },
+  "sound": {
+    "mute": "Mute sounds",
+    "unmute": "Turn sounds on"
+  },
+  "footer": {
+    "feedback": "Feedback"
+  },
+  "admin": {
+    "title": "Reported scores",
+    "intro": "Scores that players flagged as wrong. Listen and decide.",
+    "forbidden": "This page is only for administrators.",
+    "empty": "Nothing here.",
+    "tabOpen": "Open",
+    "tabReviewed": "Reviewed",
+    "round": "Round {{number}}",
+    "scoreShown": "Score shown: {{score}}",
+    "targetSegment": "Target segment",
+    "playersPick": "Player's pick",
+    "bestTwin": "Best twin",
+    "notePlaceholder": "Note for yourself (optional)",
+    "markReviewed": "Mark as reviewed",
+    "reviewed": "Marked as reviewed.",
+    "reviewedNoNote": "Reviewed."
+  },
+  "privacy": {
+    "title": "Privacy",
+    "updated": "Last updated: November 2026",
+    "intro": "SongTheSame is a small hobby project. This page explains in plain words what the site stores and who else is involved.",
+    "notice": "This site keeps a few small settings in your browser (an anonymous player id, language, sound).",
+    "learnMore": "Learn more",
+    "noticeLabel": "Storage notice",
+    "what": {
+      "title": "What we store about you",
+      "body": "When you play, we store your game results under a random anonymous id that lives in your browser. If you sign in, we also store your account id, the display name you choose (initially your Google name or the first part of your e-mail), your game results, the leagues you join and the games you create. We use no advertising and no analytics trackers."
+    },
+    "storage": {
+      "title": "What stays in your browser",
+      "body": "Your anonymous player id, the chosen language, the sound setting and whether you dismissed the storage notice are kept in your browser's local storage. They are needed for the site to work as you expect. Clearing your browser data removes them (anonymous progress is then lost)."
+    },
+    "accounts": {
+      "title": "Accounts",
+      "body": "Sign-in is provided by Supabase, using Google or an e-mail link. We receive your account id, e-mail address and name from the sign-in provider. Display names are visible to the members of leagues you join."
+    },
+    "thirdParties": {
+      "title": "Other services involved",
+      "body": "Song previews are streamed from Deezer, which therefore sees your IP address when you press play. The site runs on Google Cloud, GitHub Pages and Supabase (database and sign-in), which process data on our behalf. Song names, artists and covers belong to their owners; we do not store any audio."
+    },
+    "rights": {
+      "title": "Your choices",
+      "body": "You can ask to see or delete your data (account, results, leagues, games you created) by opening an issue on the project page linked in the footer, or by contacting the site owner. Deleting your browser data removes anonymous progress."
+    }
   }
 }

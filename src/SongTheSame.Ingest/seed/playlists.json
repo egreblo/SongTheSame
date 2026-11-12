@@ -1,28 +1,239 @@
 {
   "defaultLimit": 100,
   "playlists": [
-    { "id": 3155776842, "label": "Top Worldwide", "origin": "International" },
-    { "id": 1470022445, "label": "70s Hits", "origin": "International" },
-    { "id": 867825522, "label": "80s Hits", "origin": "International" },
-    { "id": 8512471762, "label": "80s Pop", "origin": "International" },
-    { "id": 878989033, "label": "90s Hits", "origin": "International" },
-    { "id": 2322259622, "label": "90s Party Hits", "origin": "International" },
-    { "id": 1977689462, "label": "00s Party Hits", "origin": "International" },
-    { "id": 14917741483, "label": "10s Hits", "origin": "International" },
-    { "id": 715215865, "label": "10s Party Hits", "origin": "International" },
-    { "id": 1306931615, "label": "Rock Essentials", "origin": "International" },
-    { "id": 1405240385, "label": "70s Rock", "origin": "International" },
-    { "id": 8882778922, "label": "Brit Rock Essentials", "origin": "International" },
-    { "id": 1976915302, "label": "East Coast Essentials (hip-hop)", "origin": "International" },
-    { "id": 7846286162, "label": "90s Hip-Hop Classics", "origin": "International", "limit": 100 },
-    { "id": 1266971131, "label": "Top Croatia", "origin": "Regional" },
-    { "id": 14594445201, "label": "Top Croatia 2025", "origin": "Regional" },
-    { "id": 2523580568, "label": "Hrvatska Top 50", "origin": "Regional" },
-    { "id": 6625111964, "label": "Hrvatski hitovi", "origin": "Regional" },
-    { "id": 5345589482, "label": "Hrvatski Trash Hitovi", "origin": "Regional" },
-    { "id": 3365640082, "label": "Dalmatinski hitovi", "origin": "Regional" },
-    { "id": 1266972981, "label": "Top Serbia", "origin": "Regional" },
-    { "id": 12732676801, "label": "Balkan popularnih 40", "origin": "Regional" },
-    { "id": 1362522355, "label": "Top Slovenia", "origin": "Regional" }
+    {
+      "id": 3155776842,
+      "label": "Top Worldwide",
+      "origin": "International"
+    },
+    {
+      "id": 1470022445,
+      "label": "70s Hits",
+      "origin": "International"
+    },
+    {
+      "id": 867825522,
+      "label": "80s Hits",
+      "origin": "International"
+    },
+    {
+      "id": 8512471762,
+      "label": "80s Pop",
+      "origin": "International"
+    },
+    {
+      "id": 878989033,
+      "label": "90s Hits",
+      "origin": "International"
+    },
+    {
+      "id": 2322259622,
+      "label": "90s Party Hits",
+      "origin": "International"
+    },
+    {
+      "id": 1977689462,
+      "label": "00s Party Hits",
+      "origin": "International"
+    },
+    {
+      "id": 14917741483,
+      "label": "10s Hits",
+      "origin": "International"
+    },
+    {
+      "id": 715215865,
+      "label": "10s Party Hits",
+      "origin": "International"
+    },
+    {
+      "id": 1306931615,
+      "label": "Rock Essentials",
+      "origin": "International"
+    },
+    {
+      "id": 1405240385,
+      "label": "70s Rock",
+      "origin": "International"
+    },
+    {
+      "id": 8882778922,
+      "label": "Brit Rock Essentials",
+      "origin": "International"
+    },
+    {
+      "id": 1976915302,
+      "label": "East Coast Essentials (hip-hop)",
+      "origin": "International"
+    },
+    {
+      "id": 7846286162,
+      "label": "90s Hip-Hop Classics",
+      "origin": "International",
+      "limit": 100
+    },
+    {
+      "id": 1266971131,
+      "label": "Top Croatia",
+      "origin": "Regional"
+    },
+    {
+      "id": 14594445201,
+      "label": "Top Croatia 2025",
+      "origin": "Regional"
+    },
+    {
+      "id": 2523580568,
+      "label": "Hrvatska Top 50",
+      "origin": "Regional"
+    },
+    {
+      "id": 6625111964,
+      "label": "Hrvatski hitovi",
+      "origin": "Regional"
+    },
+    {
+      "id": 5345589482,
+      "label": "Hrvatski Trash Hitovi",
+      "origin": "Regional"
+    },
+    {
+      "id": 3365640082,
+      "label": "Dalmatinski hitovi",
+      "origin": "Regional"
+    },
+    {
+      "id": 1266972981,
+      "label": "Top Serbia",
+      "origin": "Regional"
+    },
+    {
+      "id": 12732676801,
+      "label": "Balkan popularnih 40",
+      "origin": "Regional"
+    },
+    {
+      "id": 1362522355,
+      "label": "Top Slovenia",
+      "origin": "Regional"
+    },
+    {
+      "id": 1437011185,
+      "label": "60s Rock",
+      "origin": "International"
+    },
+    {
+      "id": 9002635962,
+      "label": "60s Happy Hits",
+      "origin": "International"
+    },
+    {
+      "id": 13650084141,
+      "label": "20s Hits",
+      "origin": "International"
+    },
+    {
+      "id": 13693726841,
+      "label": "Top Hits 2024",
+      "origin": "International"
+    },
+    {
+      "id": 9890417302,
+      "label": "Hits 2026",
+      "origin": "International"
+    },
+    {
+      "id": 2098157264,
+      "label": "Global Hits",
+      "origin": "International"
+    },
+    {
+      "id": 1964085082,
+      "label": "Feel Good Pop",
+      "origin": "International"
+    },
+    {
+      "id": 8326097522,
+      "label": "00s Pop",
+      "origin": "International"
+    },
+    {
+      "id": 2054469264,
+      "label": "Hip Hop Essentials",
+      "origin": "International"
+    },
+    {
+      "id": 2021626162,
+      "label": "2000s R&B",
+      "origin": "International"
+    },
+    {
+      "id": 1902101402,
+      "label": "Electronic Hits",
+      "origin": "International"
+    },
+    {
+      "id": 11879932521,
+      "label": "Heavy Metal Classics",
+      "origin": "International"
+    },
+    {
+      "id": 752286631,
+      "label": "Rock Hits",
+      "origin": "International"
+    },
+    {
+      "id": 12777203061,
+      "label": "2000s Alternative Rock",
+      "origin": "International"
+    },
+    {
+      "id": 178699142,
+      "label": "Fuego Latino",
+      "origin": "International"
+    },
+    {
+      "id": 1962379246,
+      "label": "Disney Hits",
+      "origin": "International"
+    },
+    {
+      "id": 12593394863,
+      "label": "Eurovision Hits",
+      "origin": "International"
+    },
+    {
+      "id": 9755878162,
+      "label": "EX YU hitovi",
+      "origin": "Regional",
+      "limit": 150
+    },
+    {
+      "id": 12591382163,
+      "label": "EX-YU hitovi 80s",
+      "origin": "Regional"
+    },
+    {
+      "id": 10402786222,
+      "label": "Hitovi Ex Yu Nostalgija",
+      "origin": "Regional",
+      "limit": 150
+    },
+    {
+      "id": 9869989902,
+      "label": "Hrvatski rock klasici",
+      "origin": "Regional"
+    },
+    {
+      "id": 9014568462,
+      "label": "Croatia Eurovision Hits",
+      "origin": "Regional"
+    },
+    {
+      "id": 8970386402,
+      "label": "Dalmatinski hitovi (veliki)",
+      "origin": "Regional",
+      "limit": 100
+    }
   ]
 }

@@ -12,5 +12,6 @@ internal static class IngestServiceCollectionExtensions
             .AddScoped<PlaylistCommand>()
             .AddScoped<SeedCommand>()
             .AddScoped<CalibrateCommand>()
-            .AddScoped<PuzzlesCommand>();
+            .AddScoped<PuzzlesCommand>()
+            .AddScoped<RefreshMatchesCommand>();
 }

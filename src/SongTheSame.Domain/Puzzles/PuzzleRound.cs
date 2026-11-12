@@ -1,6 +1,7 @@
 namespace SongTheSame.Domain.Puzzles;
 
-public sealed record RoundMatch(Guid SongId, int Score);
+/// <param name="StartSeconds">Where in the song preview the best-matching part begins (null for puzzles generated before this was stored).</param>
+public sealed record RoundMatch(Guid SongId, int Score, double? StartSeconds = null, double? EndSeconds = null);
 
 /// <summary>One song of a daily puzzle and the segment players must match in phase 2.</summary>
 public sealed class PuzzleRound
@@ -24,6 +25,9 @@ public sealed class PuzzleRound
 
     /// <summary>The catalog songs that match the segment best, computed when the puzzle is generated.</summary>
     public List<RoundMatch> BestMatches { get; private set; } = [];
+
+    /// <summary>Replaces the stored best twins, for example after the catalog or the calibration changed.</summary>
+    public void ReplaceBestMatches(IEnumerable<RoundMatch> matches) => BestMatches = matches.ToList();
 
     public static PuzzleRound Create(
         int index, Guid songId, int segmentStartFrame, double segmentStartSeconds, double segmentSeconds, IEnumerable<RoundMatch> bestMatches) =>

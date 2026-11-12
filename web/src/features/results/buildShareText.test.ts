@@ -15,7 +15,7 @@ function round(index: number, attempts: number, solved: boolean, score: number):
     clipSeconds: [1, 2, 4, 7, 11, 16],
     guesses: [],
     reveal: { song, solved, segmentStartSeconds: 3, segmentSeconds: 6 },
-    phase2: { guess: song, score, points: Math.round(score / 2), bestMatches: [] },
+    phase2: { guess: song, skipped: false, score, points: Math.round(score / 2), guessMatchStartSeconds: null, bestMatches: [] },
     phase1Points: 0,
     points: 0,
   }

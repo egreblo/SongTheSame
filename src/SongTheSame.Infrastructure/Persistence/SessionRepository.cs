@@ -10,6 +10,10 @@ internal sealed class SessionRepository(AppDbContext db) : ISessionRepository
     public Task<GameSession?> GetAsync(Guid id, CancellationToken cancellationToken) =>
         db.GameSessions.Include(session => session.Rounds).FirstOrDefaultAsync(session => session.Id == id, cancellationToken);
 
+    public async Task<IReadOnlyList<GameSession>> GetManyAsync(IReadOnlyCollection<Guid> ids, CancellationToken cancellationToken) =>
+        await db.GameSessions.AsNoTracking().Include(session => session.Rounds)
+            .Where(session => ids.Contains(session.Id)).ToListAsync(cancellationToken);
+
     public Task<GameSession?> FindAsync(string playerKey, Guid puzzleId, CancellationToken cancellationToken) =>
         db.GameSessions.Include(session => session.Rounds)
             .FirstOrDefaultAsync(session => session.PlayerKey == playerKey && session.PuzzleId == puzzleId, cancellationToken);

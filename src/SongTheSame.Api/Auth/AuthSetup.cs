@@ -14,6 +14,9 @@ public static class AuthSetup
         var options = configuration.GetSection(SupabaseOptions.SectionName).Get<SupabaseOptions>() ?? new SupabaseOptions();
         services.AddSingleton(options);
 
+        var admin = configuration.GetSection(AdminOptions.SectionName).Get<AdminOptions>() ?? new AdminOptions();
+        services.AddSingleton(admin);
+
         var jwks = new SupabaseJwksProvider(
             async cancellationToken =>
             {
@@ -33,7 +36,8 @@ public static class AuthSetup
                         SignatureValidator = (_, _) => throw new SecurityTokenException("Sign-in is not configured."),
                     };
             });
-        services.AddAuthorization();
+        services.AddAuthorization(authorization => authorization.AddPolicy(
+            AdminOptions.PolicyName, policy => policy.RequireAssertion(context => admin.IsAdmin(context.User))));
         return services;
     }
 }

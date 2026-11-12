@@ -35,6 +35,7 @@ app.MapHealthEndpoints();
 app.MapSongEndpoints();
 app.MapDailyEndpoints();
 app.MapMeEndpoints();
+app.MapAdminEndpoints();
 app.MapLeagueEndpoints();
 app.MapCustomGameEndpoints();
 
