@@ -50,7 +50,10 @@ jobs:
         with:
           dotnet-version: 10.0.x
       - run: dotnet build ../src/SongTheSame.Api -c Release
-      - run: npm ci
+      - name: Install web dependencies
+        run: |
+          npm ci 2>&1 | tee npm-ci.log || { echo "::error title=npm ci failed::$(tail -n 30 npm-ci.log | tr '
+' ' ' | cut -c1-1500)"; exit 1; }
       - run: npm run api:generate
       - run: npm run lint
       - run: npm run typecheck
