@@ -1,0 +1,21 @@
+name: Generate daily puzzles
+
+# Puzzle generation takes ~20 s per day, so it runs ahead of time instead of during a player's request.
+on:
+  schedule:
+    - cron: "30 21 * * *" # 21:30 UTC, i.e. before midnight in Europe/Zagreb
+  workflow_dispatch:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Generate the next 7 days of puzzles
+        env:
+          # Repository secret: the Supabase "session pooler" connection string (Npgsql format).
+          ConnectionStrings__Database: ${{ secrets.DATABASE_CONNECTION_STRING }}
+        run: dotnet run --project src/SongTheSame.Ingest -c Release -- puzzles 7

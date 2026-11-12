@@ -1,0 +1,136 @@
+{
+  "app": {
+    "title": "SongTheSame",
+    "tagline": "Five songs a day. Name them, then find their twins.",
+    "home": "Home"
+  },
+  "home": {
+    "play": "Play today's puzzle",
+    "howTitle": "How it works",
+    "how1": "Listen to a short clip and name the song. Each miss unlocks a longer clip.",
+    "how2": "Then find another song that contains the part most similar to a segment of the one you just guessed.",
+    "how3": "Five rounds a day, up to 500 points. Compare with other players and share your result."
+  },
+  "game": {
+    "loading": "Preparing today's puzzle…",
+    "loadError": "Could not load today's puzzle.",
+    "retry": "Try again",
+    "play": "Play",
+    "stop": "Stop",
+    "playSegment": "Play segment",
+    "searchPlaceholder": "Search for a song…",
+    "searchHint": "Song or artist",
+    "searchMinChars": "Type at least two characters.",
+    "searching": "Searching…",
+    "noResults": "No songs found.",
+    "guess": "Guess",
+    "skip": "Skip (+{{seconds}}s)",
+    "giveUp": "Give up",
+    "skipped": "Skipped",
+    "phase1": {
+      "title": "Which song is this?",
+      "hint": "Every miss unlocks a longer clip."
+    },
+    "phase2": {
+      "title": "Find its twin",
+      "hint": "Name another song that contains the part most similar to this segment. Tempo and key don't matter.",
+      "submit": "Submit answer",
+      "oneTry": "You only get one try."
+    },
+    "solvedIn_one": "Got it in {{count}} guess",
+    "solvedIn_other": "Got it in {{count}} guesses",
+    "notSolved": "Not guessed",
+    "similarityScore": "Similarity score",
+    "roundPoints": "{{points}} points ({{phase1}} + {{phase2}})",
+    "yourPick": "Your pick",
+    "bestTwins": "Best twins in the catalog",
+    "nextRound": "Next round",
+    "seeResults": "See results"
+  },
+  "results": {
+    "title": "Your result for {{day}}",
+    "outOf": "out of {{max}} points",
+    "compare": "How you compare",
+    "loadingStats": "Loading stats…",
+    "firstPlayer": "You're the first to finish today's puzzle.",
+    "beatPercent": "You scored higher than {{percent}}% of the {{count}} players who finished.",
+    "histogramLabel": "Score distribution of today's players",
+    "average": "Average score today: {{average}}",
+    "share": "Share your result",
+    "nextPuzzle": "Next puzzle in"
+  },
+  "share": {
+    "copy": "Copy",
+    "share": "Share",
+    "image": "Image",
+    "email": "Email",
+    "copied": "Result copied"
+  },
+  "report": {
+    "open": "Report",
+    "sent": "Reported",
+    "title": "Report this score",
+    "description": "Do you think the picked song contains a part that sounds like the segment, but the score doesn't show it? Tell us and we'll take a look.",
+    "placeholder": "Optional note (what did you hear?)",
+    "send": "Send report",
+    "thanks": "Thanks, we'll review it.",
+    "already": "You already reported this round."
+  },
+  "health": {
+    "connected": "Connected, game day {{day}}",
+    "unreachable": "Server unreachable",
+    "loading": "Checking server…"
+  },
+  "nav": {
+    "play": "Play",
+    "leagues": "Leagues",
+    "create": "Create a game"
+  },
+  "auth": {
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "title": "Sign in",
+    "description": "Save your results, join leagues and create your own games.",
+    "continueWith": "Continue with {{provider}}",
+    "emailLabel": "Or get a sign-in link by e-mail",
+    "sendLink": "Send link",
+    "linkSent": "Check your inbox for the sign-in link.",
+    "required": "Sign in to use this feature.",
+    "notConfigured": "Accounts are not set up on this server yet."
+  },
+  "leagues": {
+    "intro": "Compare your daily results with friends.",
+    "empty": "You are not in any league yet.",
+    "members_one": "{{count}} member",
+    "members_other": "{{count}} members",
+    "create": "Create a league",
+    "createButton": "Create",
+    "namePlaceholder": "League name",
+    "join": "Join with an invite code",
+    "joinButton": "Join",
+    "codePlaceholder": "Invite code",
+    "loadError": "Could not load this league.",
+    "standingsFor": "Standings for {{day}}",
+    "player": "Player",
+    "today": "Today",
+    "week": "7 days",
+    "month": "30 days",
+    "inviteCode": "Invite code",
+    "codeCopied": "Invite code copied",
+    "leave": "Leave league"
+  },
+  "editor": {
+    "intro": "Pick five songs and share your own game with friends.",
+    "titleLabel": "Game title",
+    "titlePlaceholder": "e.g. 80s night",
+    "moveUp": "Move up",
+    "moveDown": "Move down",
+    "clear": "Clear",
+    "create": "Create game",
+    "building": "Building your game…",
+    "buildingHint": "We analyse the songs to find their twins. This can take up to half a minute.",
+    "another": "Create another game",
+    "playIt": "Play it",
+    "myGames": "Your games"
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "app": {
+    "title": "SongTheSame",
+    "tagline": "Pet pjesama dnevno. Pogodi ih, pa pronađi njihove blizance.",
+    "home": "Početna"
+  },
+  "home": {
+    "play": "Igraj današnju zagonetku",
+    "howTitle": "Kako igra radi",
+    "how1": "Poslušaj kratki isječak i pogodi pjesmu. Svaki promašaj otključava duži isječak.",
+    "how2": "Zatim pronađi drugu pjesmu koja sadrži dio najsličniji odlomku pjesme koju si upravo pogodio.",
+    "how3": "Pet rundi dnevno, do 500 bodova. Usporedi se s ostalim igračima i podijeli rezultat."
+  },
+  "game": {
+    "loading": "Pripremam današnju zagonetku…",
+    "loadError": "Današnju zagonetku nije moguće učitati.",
+    "retry": "Pokušaj ponovno",
+    "play": "Pokreni",
+    "stop": "Zaustavi",
+    "playSegment": "Pokreni odlomak",
+    "searchPlaceholder": "Pretraži pjesmu…",
+    "searchHint": "Pjesma ili izvođač",
+    "searchMinChars": "Upiši barem dva znaka.",
+    "searching": "Tražim…",
+    "noResults": "Nema pronađenih pjesama.",
+    "guess": "Pogodi",
+    "skip": "Preskoči (+{{seconds}}s)",
+    "giveUp": "Odustani",
+    "skipped": "Preskočeno",
+    "phase1": {
+      "title": "Koja je ovo pjesma?",
+      "hint": "Svaki promašaj otključava duži isječak."
+    },
+    "phase2": {
+      "title": "Pronađi njezinog blizanca",
+      "hint": "Upiši drugu pjesmu koja sadrži dio najsličniji ovom odlomku. Tempo i tonalitet nisu bitni.",
+      "submit": "Potvrdi odgovor",
+      "oneTry": "Imaš samo jedan pokušaj."
+    },
+    "solvedIn_one": "Pogođeno iz {{count}}. pokušaja",
+    "solvedIn_other": "Pogođeno iz {{count}}. pokušaja",
+    "notSolved": "Nije pogođeno",
+    "similarityScore": "Rezultat sličnosti",
+    "roundPoints": "{{points}} bodova ({{phase1}} + {{phase2}})",
+    "yourPick": "Tvoj odabir",
+    "bestTwins": "Najbolji blizanci u katalogu",
+    "nextRound": "Sljedeća runda",
+    "seeResults": "Prikaži rezultat"
+  },
+  "results": {
+    "title": "Tvoj rezultat za {{day}}",
+    "outOf": "od {{max}} bodova",
+    "compare": "Usporedba s drugima",
+    "loadingStats": "Učitavam statistiku…",
+    "firstPlayer": "Prvi si koji je završio današnju zagonetku.",
+    "beatPercent": "Bolji si od {{percent}}% od {{count}} igrača koji su završili.",
+    "histogramLabel": "Raspodjela današnjih rezultata",
+    "average": "Današnji prosjek: {{average}}",
+    "share": "Podijeli rezultat",
+    "nextPuzzle": "Sljedeća zagonetka za"
+  },
+  "share": {
+    "copy": "Kopiraj",
+    "share": "Podijeli",
+    "image": "Slika",
+    "email": "E-mail",
+    "copied": "Rezultat kopiran"
+  },
+  "report": {
+    "open": "Prijavi",
+    "sent": "Prijavljeno",
+    "title": "Prijavi ovaj rezultat",
+    "description": "Misliš li da odabrana pjesma sadrži dio koji zvuči kao odlomak, ali rezultat to ne pokazuje? Javi nam i pogledat ćemo.",
+    "placeholder": "Neobavezna napomena (što si čuo?)",
+    "send": "Pošalji prijavu",
+    "thanks": "Hvala, pogledat ćemo.",
+    "already": "Ovu rundu si već prijavio."
+  },
+  "health": {
+    "connected": "Povezano, dan igre {{day}}",
+    "unreachable": "Server nije dostupan",
+    "loading": "Provjera servera…"
+  },
+  "nav": {
+    "play": "Igraj",
+    "leagues": "Lige",
+    "create": "Izradi igru"
+  },
+  "auth": {
+    "signIn": "Prijava",
+    "signOut": "Odjava",
+    "title": "Prijava",
+    "description": "Spremi rezultate, uključi se u lige i izradi vlastite igre.",
+    "continueWith": "Nastavi s {{provider}}",
+    "emailLabel": "Ili primi poveznicu za prijavu e-mailom",
+    "sendLink": "Pošalji poveznicu",
+    "linkSent": "Provjeri pristiglu poštu, poslali smo poveznicu za prijavu.",
+    "required": "Prijavi se za korištenje ove mogućnosti.",
+    "notConfigured": "Računi još nisu postavljeni na ovom serveru."
+  },
+  "leagues": {
+    "intro": "Usporedi dnevne rezultate s prijateljima.",
+    "empty": "Još nisi ni u jednoj ligi.",
+    "members_one": "{{count}} član",
+    "members_few": "{{count}} člana",
+    "members_other": "{{count}} članova",
+    "create": "Napravi ligu",
+    "createButton": "Napravi",
+    "namePlaceholder": "Naziv lige",
+    "join": "Pridruži se kodom za poziv",
+    "joinButton": "Pridruži se",
+    "codePlaceholder": "Kod za poziv",
+    "loadError": "Ligu nije moguće učitati.",
+    "standingsFor": "Poredak za {{day}}",
+    "player": "Igrač",
+    "today": "Danas",
+    "week": "7 dana",
+    "month": "30 dana",
+    "inviteCode": "Kod za poziv",
+    "codeCopied": "Kod za poziv kopiran",
+    "leave": "Napusti ligu"
+  },
+  "editor": {
+    "intro": "Odaberi pet pjesama i podijeli vlastitu igru s prijateljima.",
+    "titleLabel": "Naslov igre",
+    "titlePlaceholder": "npr. Osamdesete",
+    "moveUp": "Pomakni gore",
+    "moveDown": "Pomakni dolje",
+    "clear": "Očisti",
+    "create": "Izradi igru",
+    "building": "Izrađujem igru…",
+    "buildingHint": "Analiziramo pjesme da pronađemo njihove blizance. To može trajati do pola minute.",
+    "another": "Izradi novu igru",
+    "playIt": "Igraj",
+    "myGames": "Tvoje igre"
+  }
+}

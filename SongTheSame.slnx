@@ -1,0 +1,20 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/SongTheSame.Api/SongTheSame.Api.csproj" />
+    <Project Path="src/SongTheSame.Application/SongTheSame.Application.csproj" />
+    <Project Path="src/SongTheSame.Audio/SongTheSame.Audio.csproj" />
+    <Project Path="src/SongTheSame.Domain/SongTheSame.Domain.csproj" />
+    <Project Path="src/SongTheSame.Infrastructure/SongTheSame.Infrastructure.csproj" />
+    <Project Path="src/SongTheSame.Ingest/SongTheSame.Ingest.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/SongTheSame.Api.IntegrationTests/SongTheSame.Api.IntegrationTests.csproj" />
+    <Project Path="tests/SongTheSame.Application.Tests/SongTheSame.Application.Tests.csproj" />
+    <Project Path="tests/SongTheSame.Audio.Tests/SongTheSame.Audio.Tests.csproj" />
+    <Project Path="tests/SongTheSame.Domain.Tests/SongTheSame.Domain.Tests.csproj" />
+    <Project Path="tests/SongTheSame.Infrastructure.Tests/SongTheSame.Infrastructure.Tests.csproj" />
+  </Folder>
+  <Folder Name="/tools/">
+    <Project Path="tools/SongTheSame.Spike/SongTheSame.Spike.csproj" />
+  </Folder>
+</Solution>
